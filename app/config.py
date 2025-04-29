@@ -8,14 +8,13 @@ class Config:
         Initializes the Config object by loading environment variables.
         No arguments are needed to create an instance.
         """
-        load_dotenv('.env') # Load variables from .env file
+        load_dotenv('.env') 
 
-        # Load database configuration from environment variables
         self.DB_HOST = os.getenv("DB_HOST")
         self.DB_USER = os.getenv("DB_USER")
         self.DB_PASSWORD = os.getenv("DB_PASSWORD")
         self.DB_NAME = os.getenv("DB_NAME")
-        self.DB_PORT = os.getenv("DB_PORT") # Keep as string initially
+        self.DB_PORT = os.getenv("DB_PORT") 
         self.SSL_CA_PATH = os.getenv("SSL_CA_PATH")
 
         # Load Flask specific configs if needed (optional)
@@ -25,12 +24,12 @@ class Config:
     def get_connection_params(self):
         """Returns a dictionary suitable for mysql.connector.connect()"""
         params = {
-            'host': os.getenv('DB_HOST', 'localhost'),  # Obtém o host do banco de dados da variável de ambiente
-            'user': os.getenv('DB_USER'),  # Obtém o usuário do banco de dados da variável de ambiente
-            'password': os.getenv('DB_PASSWORD'),  # Obtém a senha do banco de dados da variável de ambiente
-            'database': os.getenv('DB_NAME'),  # Obtém o nome do banco de dados da variável de ambiente
-            'port': int(os.getenv('DB_PORT', 3306)),  # Obtém a porta do banco de dados da variável de ambiente
-            'ssl_ca': os.getenv('SSL_CA_PATH')  # Caminho para o certificado SSL
+            'host': os.getenv('DB_HOST', 'localhost'),  
+            'user': os.getenv('DB_USER'), 
+            'password': os.getenv('DB_PASSWORD'),  
+            'database': os.getenv('DB_NAME'),  
+            'port': int(os.getenv('DB_PORT', 3306)),  
+            'ssl_ca': os.getenv('SSL_CA_PATH') 
         }
         
         if self.SSL_CA_PATH:
@@ -38,11 +37,5 @@ class Config:
             params['ssl_verify_cert'] = True
         
         return params
-
-# Example of how to use it elsewhere (e.g., in app/db.py):
-# from .config import Config
-# config_instance = Config() # Just create an instance, it loads automatically
-# connection_params = config_instance.get_connection_params()
-# conn = mysql.connector.connect(**connection_params)
 
 
