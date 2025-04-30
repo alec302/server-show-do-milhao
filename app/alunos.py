@@ -69,7 +69,7 @@ class AlunoAPI(MethodView):
 
         conn = connect_db()
         if conn is None or not conn.is_connected():
-            return {"erro": "Erro ao conectar ao banco de dados"}, 500
+            return {"erro": "Erro ao conectar ao banco de dado"}, 500
 
         try:
             cursor = conn.cursor()
