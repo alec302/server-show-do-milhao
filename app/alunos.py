@@ -14,7 +14,7 @@ class AlunoAPI(MethodView):
             return {"erro": "Erro ao conectar ao banco de dados"}, 500
 
         cursor = conn.cursor()
-        cursor.execute("SELECT id, nome, idade FROM Teste")
+        cursor.execute("SELECT id, nome, cpf, idade FROM Teste")
         results = cursor.fetchall()
         cursor.close()
         conn.close()
@@ -23,7 +23,7 @@ class AlunoAPI(MethodView):
             return {"erro": "Nenhum aluno encontrado"}, 404
 
         alunos = [
-            {"id": row[0], "nome": row[1], "idade": row[3]}
+            {"id": row[0], "nome": row[1], "cpf": row[2], "idade": row[3]}
             for row in results
         ]
         return {"alunos": alunos}, 200

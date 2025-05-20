@@ -110,4 +110,4 @@ class TurmaAPI(MethodView):
 
 view = TurmaAPI.as_view("turma_api")
 turmas_bp.add_url_rule("/turmas", view_func=view, methods=["GET", "POST"])
-# turmas_bp.add_url_rule("/turmas/<int:id>", view_func=view, methods=["PUT", "DELETE"])
+turmas_bp.add_url_rule("/turmas/<int:id>", view_func=view, methods=["PUT", "DELETE"])
